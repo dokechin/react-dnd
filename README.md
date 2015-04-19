@@ -1,95 +1,106 @@
-Fixed Data Tables for React
-====================================
+React DnD
+=========
 
-FixedDataTable is a React component for building and presenting data in a flexible, powerful way. It supports standard table features, like headers, columns, rows, header groupings, and both fixed-position and scrolling columns.
+[![Join the chat at https://gitter.im/gaearon/react-dnd](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gaearon/react-dnd?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)  
 
-The table was designed to handle thousands rows of data without sacrificing performance. Scrolling smoothly is a first-class goal of FixedDataTable and it's architected in a way to allow for flexibility and extensibility.
+Drag and drop for React with full DOM control.
 
-Features of FixedDataTable:
-* Fixed headers and footer
-* Both fixed and scrollable columns
-* Handling huge amounts of data
-* Variable row heights (with adaptive scroll positions)
-* Column resizing
-* Performant scrolling
-* Customizable styling
-* Jumping to a row or column
-* Controlled scroll API allows touch support
+Currently works on top of HTML5 drag-and-drop API, but is moving towards a swappable implementation. Support for touch events is on the roadmap but not currently implemented.
 
-Things the FixedDataTable doesn't do:
-* FixedDataTable does not provide a layout reflow mechanism or calculate content layout information such as width and height of the cell contents. The developer has to provide the layout information to the table instead.
-* FixedDataTable does not handle sorting of data. Instead it allows the developer to supply data getters that can be sort-, filter-, or tail-loading-aware.
-* FixedDataTable does not fetch the data (see above)
+>**If your company uses React DnD and would like to speed up its development, consider sponsoring the project. I'm currently doing it in the spare time but I would be happy to work on it part-time. Drop me an email at <a href='mailto:dan.abramov@me.com'>dan.abramov@me.com</a>. Exciting new features take time.**
 
-Getting started
----------------
+## Philosophy
 
-Install `fixed-data-table` using npm.
+* Keep user in full control over rendering;
+* Don't make assumptions about consuming components and their structure;
+* Hide underlying implementation and its quirks;
+* Make 80% easy, 20% possible.
 
-```shell
-npm install fixed-data-table
+## Live Demo
+
+#### [See it in action!](http://gaearon.github.io/react-dnd/) ([Source](https://github.com/gaearon/react-dnd/tree/master/examples))
+
+Demo contains a variety of things you can implement with this library, including:
+
+* Reacting to hover and dropping;
+* Dropping files;
+* Dragging a box around with snapping;
+* Drawing a custom drag layer;
+* Making cards sortable.
+
+You can do much more, but these examples will help you get started!
+
+## Features
+
+* Emits zero DOM or CSS of its own;
+* Like original HTML5 API, emphasizes dragging data and not just “draggable views”;
+* Support dropping files using the same API;
+* Lets components register as “drag sources” or “drop targets” for different kinds of data;
+* Lets a single component contain several drag sources and drop targets;
+* Lets you provide a custom drag handle, whether DOM subnode or an image;
+* Takes the best from HTML5 API but [hides its many quirks](http://www.quirksmode.org/blog/archives/2009/09/the_html5_drag.html):
+  - doesn't require you to `preventDefault` anything to start working;
+  - emits `enter` and `leave` as you'd expect instead of doing it for every child node;
+  - lets you read drag state from `render()`;
+  - consistently fires events even if source DOM node was removed;
+* Includes a helper to preload images for drag thumbnails;
+* Lets you render a custom drag layer if you'd rather draw your own drag preview.
+
+## Documentation
+
+### SemVer
+
+We plan to follow SemVer after 1.0. Before 1.0, minor version bumps may contain breaking changes. Breaking changes will be documented in the **[Upgrade Guide](https://github.com/gaearon/react-dnd/blob/master/docs/UPGRADE_GUIDE.md)**.
+
+### API Reference
+
+Complete API reference is available **[here](https://github.com/gaearon/react-dnd/tree/master/docs/API.md)**.
+
+### Walkthrough
+
+If you don't feel comfortable diving into examples source code just yet, you can start with **[the walkthrough](https://github.com/gaearon/react-dnd/tree/master/docs/Walkthrough.md)**.
+
+### Examples
+
+Have you played with **[live demo](http://gaearon.github.io/react-dnd/)** yet? Here's **[the source code for it](https://github.com/gaearon/react-dnd/tree/master/examples)**.
+
+To try it locally, clone the project and run:
+
+```
+npm install
+npm start
+open http://localhost:8080/
 ```
 
-Add the default stylesheet `dist/fixed-data-table.css`, then require it into any module.
+Examples use **[ES6 syntax](https://babeljs.io/docs/learn-es6/)** via **[Babel](https://babeljs.io/)** transpiler. You can still use React DnD in an ES5 codebase, but if you copy code from examples, make sure you translate it to ES5 where needed.
 
-```javascript
-var React = require('react');
-var FixedDataTable = require('fixed-data-table');
+## Installation
 
-var Table = FixedDataTable.Table;
-var Column = FixedDataTable.Column;
+The library can be used separately (`dist/ReactDND.min.js`) or with a bundler such as Webpack or Browserify.
 
-// Table data as a list of array.
-var rows = [
-  ['a1', 'b1', 'c1'],
-  ['a2', 'b3', 'c2'],
-  ['a3', 'b3', 'c3'],
-  ..... /// and more
-];
-
-function rowGetter(rowIndex) {
-  return rows[rowIndex];
-}
-
-React.render(
-  <Table
-    rowHeight={50}
-    rowGetter={rowGetter}
-    rowsCount={rows.length}
-    width={5000}
-    height={5000}
-    headerHeight={50}>
-    <Column
-      label="Col 1"
-      width={3000}
-      dataKey={0}
-    />
-    <Column
-      label="Col 2"
-      width={2000}
-      dataKey={1}
-    />
-  </Table>,
-  document.getElementById('example')
-);
+```
+npm install --save react-dnd
 ```
 
+## Future Roadmap
 
-Contributions
-------------
+* Touch support;
+* Support for mouse events instead of HTML5 drag-and-drop events;
+* Dragging multiple items at once.
 
-Use [Github issues](https://github.com/facebook/fixed-data-table/issues) for requests.
+## Production Usage
 
-We actively welcome pull requests; learn how to [contribute](https://github.com/facebook/fixed-data-table/blob/master/CONTRIBUTING.md).
+* [Stampsy](http://stampsy.com), where it was originally developed, is using React DnD for the post editor.
+* [Add your company!](https://github.com/gaearon/react-dnd/edit/master/README.md)
 
+## See Also
 
-Changelog
----------
+* [react-draggable](https://github.com/mzabriskie/react-draggable) by [Matt Zabriskie](https://github.com/mzabriskie)
+* [react-sortable](https://github.com/danielstocks/react-sortable) by [Daniel Stocks](https://github.com/danielstocks)
+* [react-dropzone](https://github.com/paramaggarwal/react-dropzone) by [Param Aggarwal](https://github.com/paramaggarwal)
 
-Changes are tracked as [Github releases](https://github.com/facebook/fixed-data-table/releases).
+## Thanks
 
+This library is a React port of an API, parts of which were originally written by [Andrew Kuznetsov](http://github.com/cavinsmith/).
 
-License
--------
-
-`FixedDataTable` is [BSD-licensed](https://github.com/facebook/fixed-data-table/blob/master/LICENSE). We also provide an additional [patent grant](https://github.com/facebook/fixed-data-table/blob/master/PATENTS).
+A lot of recent progress is due to [Nathan Hutchison](https://github.com/nelix)'s contributions and effort.
