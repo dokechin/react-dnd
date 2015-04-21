@@ -12,12 +12,13 @@
 
 "use strict";
 
-var ExampleHeader = require('./ExampleHeader');
-var ExamplesWrapper = require('./ExamplesWrapper');
-var TouchExampleWrapper = require('./TouchExampleWrapper');
 var React = require('react');
-var Constants = require('../Constants');
 
+var ExampleHeader = require('../examples/ExampleHeader');
+var ExamplesWrapper = require('../examples/ExamplesWrapper');
+var TouchExampleWrapper = require('../examples/TouchExampleWrapper');
+
+var Constants = require('../Constants');
 var ExamplePages = Constants.ExamplePages;
 
 var ExamplesPage = React.createClass({
@@ -47,28 +48,28 @@ var ExamplesPage = React.createClass({
 
     switch (this.props.example) {
       case ExamplePages.OBJECT_DATA_EXAMPLE:
-        var ObjectDataExample = require('./ObjectDataExample');
+        var ObjectDataExample = require('../examples/ObjectDataExample');
         return (
           <TouchExampleWrapper {...this.state}>
             <ObjectDataExample />
           </TouchExampleWrapper>
         );
       case ExamplePages.RESIZE_EXAMPLE:
-        var ResizeExample = require('./ResizeExample');
+        var ResizeExample = require('../examples/ResizeExample');
         return (
           <TouchExampleWrapper {...this.state}>
             <ResizeExample />
           </TouchExampleWrapper>
         );
       case ExamplePages.FLEXGROW_EXAMPLE:
-        var FlexGrowExample = require('./FlexGrowExample');
+        var FlexGrowExample = require('../examples/FlexGrowExample');
         return (
           <TouchExampleWrapper {...this.state}>
             <FlexGrowExample />
           </TouchExampleWrapper>
         );
       case ExamplePages.COLUMN_GROUPS_EXAMPLE:
-        var ColumnGroupsExample = require('./ColumnGroupsExample');
+        var ColumnGroupsExample = require('../examples/ColumnGroupsExample');
         return (
           <TouchExampleWrapper {...this.state}>
             <ColumnGroupsExample />

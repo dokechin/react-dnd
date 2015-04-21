@@ -1,9 +1,11 @@
 "use strict";
 
-var Constants = require('../Constants');
-var DocsHTMLWrapper = require('./DocsHTMLWrapper');
-var TableAPIHTML = require('../../docs/TableAPI.md');
 var React = require('react');
+
+var DocsHTMLWrapper = require('./DocsHTMLWrapper');
+
+var TableAPIHTML = require('../../docs/TableAPI.md');
+var Constants = require('../Constants');
 
 var TableAPIPage = React.createClass({
   render() {

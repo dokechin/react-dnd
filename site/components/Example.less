@@ -1,0 +1,51 @@
+.Example {
+  @import (less) '../base.less';
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  .Example-header {
+    margin-bottom: 1rem;
+    color: @color-lightBlue;
+    opacity: 0.5;
+
+    a {
+      text-decoration: underline;
+    }
+  }
+
+  .Example-container {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    max-width: @content-width;
+  }
+
+  .Example-list {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    border-radius: 5px;
+    background-color: fade(@color-lightBlue, 10%);
+    border: 1px dashed @color-lightBlue;
+
+    + .Example-list {
+      margin-left: 2rem;
+    }
+  }
+
+  .Example-listItem {
+    padding: 1rem;
+    border-radius: 5px;
+    background-color: fade(@color-lightBlue, 10%);
+    border: 1px dashed @color-lightBlue;
+
+    + .Example-listItem {
+      margin-top: 1rem;
+    }
+  }
+}

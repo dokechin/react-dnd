@@ -12,31 +12,31 @@
 
 "use strict";
 
-require('./examplesPageStyle.less');
-
-var MiniHeader = require('../MiniHeader');
-var SideBar = require('../SideBar');
 var React = require('react');
+
+var Header = require('../components/Header');
+var SideBar = require('../components/SideBar');
+var PageBody = require('../components/PageBody');
+
 var Constants = require('../Constants');
 
 var ExamplesWrapper = React.createClass({
   render() {
     return (
-      <div className="examplesPage">
-        <MiniHeader />
+      <div>
+        <Header />
 
-        <div className="pageBody" id="body">
-          <div className="contents">
-            <SideBar
-              title="Examples"
-              pages={Constants.ExamplePages}
-              example={this.props.example}
-            />
-            <div className="exampleContents">
-              {this.props.children}
-            </div>
+        <PageBody>
+          <SideBar
+            title="Examples"
+            pages={Constants.ExamplePages}
+            example={this.props.example}
+          />
+
+          <div>
+            {this.props.children}
           </div>
-        </div>
+        </PageBody>
       </div>
     );
   }
